@@ -231,7 +231,7 @@
   window.addEventListener("load", () => {
     const disclaimerEl = document.getElementById("disclaimer");
     const removeDisclaimerEl = document.getElementById("remove-disclaimer");
-    disclaimerEl.classList.remove("hidden");
+    disclaimerEl.classList.remove("hiden");
     disclaimerEl.classList.add("block");
 
     removeDisclaimerEl.addEventListener("click", () => {

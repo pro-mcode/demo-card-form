@@ -22,9 +22,10 @@
     ></script>
   </head>
   <body class="body-container font-sans relative">
+    <!-- Disclaimer -->
     <div
       id="disclaimer"
-      class="absolute hidden left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-white text-base font-medium z-10 p-8 rounded-lg min-w-[280px] md:max-w-[400px] duration-150 transition-all ease-in-out disclaimer"
+      class="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-white text-base font-medium z-20 p-6 rounded-lg min-w-[280px] md:max-w-[400px] duration-150 transition-all ease-in-out disclaimer"
     >
       <!-- <div
         id="remove-disclaimer"
@@ -44,94 +45,87 @@
     </div>
     <!-- Global Container -->
     <div
-      class="flex flex-col justify-start items-start md:flex-row md:items-strecth"
+      class="flex flex-col justify-start items-start w-screen min-h-screen md:flex-row md:items-strecth max-w-[1440px] mx-auto relative"
     >
-      <!-- Left Panel -->
+      <!-- Background Image Covering 30% of the Screen on Desktop View -->
+      <img
+        src="/images/bg-main-desktop.png"
+        alt=""
+        class="min-h-screen w-[35%] xl:max-w-[30%] hidden md:block"
+      />
+      <!-- Background Image Covering 30% of the Screen on Desktop View -->
+      <img
+        src="/images/bg-main-mobile.png"
+        alt=""
+        class="max-h-[30vh] w-full md:hidden"
+      />
+      <!-- Card Back Container -->
       <div
-        class="relative w-screen h-auto md:h-screen md:w-auto xl:max-w-[30%]"
+        class="absolute top-[4%] right-[4%] w-72 h-[10rem] max-h-[10rem] max-w-[80%] md:h-52 md:max-h-[12rem] md:w-[20rem] md:max-w-[20rem] md:top-[50%] md:left-[10%] lg:left-[15%] z-10 hover:scale-105 transition-all duration-300"
       >
-        <img
-          src="/images/bg-main-mobile.png"
-          alt=""
-          class="max-h-[18rem] w-full md:hidden"
-        />
-        <div
-          class="absolute top-[10%] right-[4%] w-80 max-w-[80%] md:top-[52%] md:left-[30%] md:w-[22rem] md:max-w-[22rem] lg:left-[40%] xl:left-[60%] lg:max-w-[130rem] xl:top-[50%]"
-        >
-          <div
-            class="relative flex justify-center items-center hover:scale-105 transition-all duration-300"
-          >
-            <div class="absolute top-[45%] w-full">
-              <div
-                class="flex justify-end items-center gap-2 mx-auto mb-[5%] w-[80%]"
-              >
-                <span
-                  class="text-[#fff] text-xs tracking-widest font-medium pr-3"
-                  id="pv-cvc"
-                  >123</span
-                >
-              </div>
-            </div>
-
-            <img src="/images/bg-card-back.png" alt="" class="w-full" />
-          </div>
-        </div>
-        <div
-          class="absolute top-[52%] right-[12%] w-80 max-w-[80%] md:top-[20%] md:left-[20%] md:w-[22rem] md:max-w-[22rem] lg:left-[30%] xl:left-[45%]"
-        >
-          <div
-            class="relative flex justify-center items-center hover:scale-105 transition-all duration-300"
-          >
-            <div class="absolute flex items-center top-[10%] left-[5%] gap-2">
-              <span class="w-8 h-8 bg-white rounded-full"></span>
+        <div class="relative flex justify-center items-center h-full">
+          <!-- Back Card Image -->
+          <img src="/images/bg-card-back.png" alt="" class="w-full h-full" />
+          <div class="absolute top-[45%] w-full">
+            <div
+              class="flex justify-end items-center gap-2 mx-auto mb-[5%] w-[80%]"
+            >
               <span
-                class="w-4 h-4 bg-transparent rounded-full border-2 border-white"
-              ></span>
-            </div>
-            <div class="absolute top-[50%] w-full preview">
-              <div
-                class="flex justify-center items-center gap-2 mx-auto mb-[5%]"
+                class="text-[#fff] text-xs tracking-widest font-medium pr-3"
+                id="pv-cvc"
+                >123</span
               >
-                <span
-                  class="text-[#fff] text-base tracking-widest font-medium font-sans md:text-base"
-                  id="pv-card"
-                  >0000 0000 0000 0000</span
-                >
-              </div>
-              <div
-                class="flex justify-between items-center gap-4 text-white px-5 mx-auto"
-              >
-                <p
-                  class="text-[#fff] text-sm md:tracking-wider font-medium uppercase"
-                  id="pv-name"
-                >
-                  Adedamola Maxwell
-                </p>
-                <p
-                  class="text-[#fff] text-sm tracking-widest font-medium md:text-base"
-                  id="pv-exp"
-                >
-                  00/00
-                </p>
-              </div>
             </div>
-            <!-- Front Card -->
-            <img src="/images/bg-card-front.png" alt="" class="w-full" />
           </div>
         </div>
-        <img
-          src="/images/bg-main-desktop.png"
-          alt=""
-          class="h-full w-full hidden md:block"
-        />
       </div>
-      <!-- Right Panel -->
+      <!-- Card Front Container -->
       <div
-        class="md:hiddn relative flex flex-col justify-center items-center min-h-fit w-screen mx-auto md:h-screen mb-20 md:mb-0 md:w-[50%] md:max-w-lg md:pl-1 md:pr-5 lg:pl-5"
+        class="absolute top-[4%] right-[12%] w-72 h-[10rem] max-h-[10rem] max-w-[80%] translate-y-[6rem] md:h-52 md:max-h-[12rem] md:w-[20rem] md:max-w-[20rem] md:top-[50%] md:left-[8%] lg:left-[13%] md:translate-y-[-210px] z-10 hover:scale-105 transition-all duration-300"
+      >
+        <div class="relative flex justify-center items-center h-full">
+          <div class="absolute flex items-center top-[10%] left-[5%] gap-2">
+            <span class="w-8 h-8 bg-white rounded-full"></span>
+            <span
+              class="w-4 h-4 bg-transparent rounded-full border-2 border-white"
+            ></span>
+          </div>
+          <!-- Front Card Image -->
+          <img src="/images/bg-card-front.png" alt="" class="w-full h-full" />
+          <div class="absolute top-[50%] w-full preview">
+            <div class="flex justify-center items-center gap-2 mx-auto mb-[5%]">
+              <span
+                class="text-[#fff] text-sm tracking-widest font-medium font-sans md:text-base"
+                id="pv-card"
+                >0000 0000 0000 0000</span
+              >
+            </div>
+            <div
+              class="flex justify-between items-center gap-4 text-white px-5 mx-auto"
+            >
+              <p
+                class="text-[#fff] text-[12px] font-medium uppercase md:text-sm md:tracking-wider"
+                id="pv-name"
+              >
+                Adedamola Maxwell
+              </p>
+              <p
+                class="text-[#fff] text-[12px] tracking-widest font-medium md:text-base"
+                id="pv-exp"
+              >
+                00/00
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Form and Complete State Container -->
+      <div
+        class="md:hiddn relative flex flex-col justify-center items-center min-h-fit w-screen mx-auto md:h-screen mb-20 md:mb-0 md:max-w-[50%] md:translate-x-[14%] lg:translate-x-[0]"
       >
         <!-- Form -->
         <form
-          class="max-w-md w-[80%] mt-20 md:max-w-fit md:ml-28 lg:ml-0 md:mt-0"
+          class="max-w-[80%] translate-y-[30%] md:translate-y-[0] pb-12 md:pb-0"
           id="cardForm"
           novalidate
         >
@@ -228,7 +222,7 @@
         </form>
         <!-- Completed State -->
         <div
-          class="hidden flex-col justify-center items-center space-y-6 max-w-md w-[80%] mt-32 md:max-w-fit md:ml-28 lg:ml-0 md:mt-0"
+          class="hidden flex-col justify-center items-center space-y-6 max-w-[80%] translate-y-[40%] md:translate-y-[0] pb-12 md:pb-0"
           id="completed"
         >
           <img
