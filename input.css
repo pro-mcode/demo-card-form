@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.body-conainer {
+  @apply flex flex-col justify-center items-center min-h-screen;
+}
+/* input:focus {
+  border: 1.5px solid transparent;
+  border-image: linear-gradient(
+      to right,
+      hsl(249, 99%, 64%),
+      hsl(278, 94%, 30%)
+    )
+    1;
+  border-radius: 8px;
+}
+ */
+.disclaimer {
+  background: linear-gradient(
+    to top right,
+    hsl(249, 99%, 64%),
+    hsl(278, 94%, 30%),
+    hsl(300, 76%, 45%)
+  );
+}
+/* input:focus {
+  border-radius: 8px;
+  border: 1px solid
+    linear-gradient(to right, hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+} */

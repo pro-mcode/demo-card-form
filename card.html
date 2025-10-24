@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Card Form — Validation + Checkmarks</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 24px;
+        max-width: 700px;
+        margin: auto;
+      }
+      label {
+        display: block;
+        margin-top: 12px;
+        font-weight: 600;
+      }
+      .input-row {
+        position: relative;
+      }
+      input {
+        width: 100%;
+        padding: 8px 36px 8px 10px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1rem;
+      }
+      .checkmark {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.1rem;
+        color: green;
+        display: none;
+      }
+      .checkmark.visible {
+        display: inline;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+      }
+      .small {
+        flex: 1 1 100px;
+      }
+      .error {
+        color: #b00020;
+        font-size: 0.9rem;
+        margin-top: 6px;
+      }
+      .preview {
+        margin-top: 20px;
+        padding: 12px;
+        border: 1px dashed #999;
+        border-radius: 8px;
+        background: #fafafa;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Card Details</h1>
+
+    <form id="cardForm" novalidate>
+      <!-- Name -->
+      <label for="name">Name on card</label>
+      <div class="input-row">
+        <input id="name" name="name" type="text" placeholder="Jane Appleseed" />
+        <span class="checkmark" id="ok-name">✅</span>
+      </div>
+      <div id="err-name" class="error"></div>
+
+      <!-- Card Number -->
+      <label for="cardNumber">Card number (can include spaces)</label>
+      <div class="input-row">
+        <input
+          id="cardNumber"
+          name="cardNumber"
+          type="text"
+          inputmode="numeric"
+          autocomplete="cc-number"
+          placeholder="4242 4242 4242 4242"
+        />
+        <span class="checkmark" id="ok-cardNumber">✅</span>
+      </div>
+      <div id="err-cardNumber" class="error"></div>
+
+      <!-- Exp + CVC -->
+      <div class="row">
+        <div class="small">
+          <label for="expMM">Exp. month (MM)</label>
+          <div class="input-row">
+            <input
+              id="expMM"
+              name="expMM"
+              type="text"
+              inputmode="numeric"
+              placeholder="MM"
+              maxlength="2"
+            />
+            <span class="checkmark" id="ok-expMM">✅</span>
+          </div>
+          <div id="err-expMM" class="error"></div>
+        </div>
+
+        <div class="small">
+          <label for="expYY">Exp. year (YY)</label>
+          <div class="input-row">
+            <input
+              id="expYY"
+              name="expYY"
+              type="text"
+              inputmode="numeric"
+              placeholder="YY"
+              maxlength="2"
+            />
+            <span class="checkmark" id="ok-expYY">✅</span>
+          </div>
+          <div id="err-expYY" class="error"></div>
+        </div>
+
+        <div class="small">
+          <label for="cvc">CVC</label>
+          <div class="input-row">
+            <input
+              id="cvc"
+              name="cvc"
+              type="text"
+              inputmode="numeric"
+              placeholder="CVC"
+              maxlength="4"
+            />
+            <span class="checkmark" id="ok-cvc">✅</span>
+          </div>
+          <div id="err-cvc" class="error"></div>
+        </div>
+      </div>
+
+      <button id="nextBtn" type="submit" disabled>Next</button>
+    </form>
+
+    <div class="preview">
+      <strong>Live Reveal</strong>
+      <p><b>Name:</b> <span id="pv-name"></span></p>
+      <p><b>Card number:</b> <span id="pv-card"></span></p>
+      <p><b>Exp (MM/YY):</b> <span id="pv-exp"></span></p>
+      <p><b>CVC:</b> <span id="pv-cvc"></span></p>
+    </div>
+
+    <script>
+      (function () {
+        const fields = {
+          name: {
+            el: document.getElementById("name"),
+            ok: document.getElementById("ok-name"),
+            err: document.getElementById("err-name"),
+          },
+          cardNumber: {
+            el: document.getElementById("cardNumber"),
+            ok: document.getElementById("ok-cardNumber"),
+            err: document.getElementById("err-cardNumber"),
+          },
+          expMM: {
+            el: document.getElementById("expMM"),
+            ok: document.getElementById("ok-expMM"),
+            err: document.getElementById("err-expMM"),
+          },
+          expYY: {
+            el: document.getElementById("expYY"),
+            ok: document.getElementById("ok-expYY"),
+            err: document.getElementById("err-expYY"),
+          },
+          cvc: {
+            el: document.getElementById("cvc"),
+            ok: document.getElementById("ok-cvc"),
+            err: document.getElementById("err-cvc"),
+          },
+        };
+
+        const preview = {
+          name: document.getElementById("pv-name"),
+          card: document.getElementById("pv-card"),
+          exp: document.getElementById("pv-exp"),
+          cvc: document.getElementById("pv-cvc"),
+        };
+
+        const nextBtn = document.getElementById("nextBtn");
+        const form = document.getElementById("cardForm");
+
+        function digitsOnly(s) {
+          return /^\d+$/.test(s);
+        }
+        function isTwoDigits(s) {
+          return /^\d{2}$/.test(s);
+        }
+        function isThreeFour(s) {
+          return /^\d{3,4}$/.test(s);
+        }
+
+        function validate() {
+          const nameVal = fields.name.el.value.trim();
+          const cardValRaw = fields.cardNumber.el.value.trim();
+          const cardVal = cardValRaw.replace(/\s+/g, ""); // remove spaces before validation
+          const mm = fields.expMM.el.value.trim();
+          const yy = fields.expYY.el.value.trim();
+          const cvc = fields.cvc.el.value.trim();
+
+          let valid = true;
+
+          // Name
+          if (!nameVal) {
+            fields.name.err.textContent = "Name is required.";
+            fields.name.ok.classList.remove("visible");
+            valid = false;
+          } else {
+            fields.name.err.textContent = "";
+            fields.name.ok.classList.add("visible");
+          }
+
+          // Card number
+          if (!cardVal) {
+            fields.cardNumber.err.textContent = "Card number required.";
+            fields.cardNumber.ok.classList.remove("visible");
+            valid = false;
+          } else if (!digitsOnly(cardVal)) {
+            fields.cardNumber.err.textContent = "Digits only (0-9).";
+            fields.cardNumber.ok.classList.remove("visible");
+            valid = false;
+          } else if (cardVal.length < 12 || cardVal.length > 19) {
+            fields.cardNumber.err.textContent = "Invalid length.";
+            fields.cardNumber.ok.classList.remove("visible");
+            valid = false;
+          } else {
+            fields.cardNumber.err.textContent = "";
+            fields.cardNumber.ok.classList.add("visible");
+          }
+
+          // Exp MM
+          if (!mm) {
+            fields.expMM.err.textContent = "MM required.";
+            fields.expMM.ok.classList.remove("visible");
+            valid = false;
+          } else if (!isTwoDigits(mm) || +mm < 1 || +mm > 12) {
+            fields.expMM.err.textContent = "Must be 01–12.";
+            fields.expMM.ok.classList.remove("visible");
+            valid = false;
+          } else {
+            fields.expMM.err.textContent = "";
+            fields.expMM.ok.classList.add("visible");
+          }
+
+          // Exp YY
+          if (!yy) {
+            fields.expYY.err.textContent = "YY required.";
+            fields.expYY.ok.classList.remove("visible");
+            valid = false;
+          } else if (!isTwoDigits(yy)) {
+            fields.expYY.err.textContent = "2 digits only.";
+            fields.expYY.ok.classList.remove("visible");
+            valid = false;
+          } else {
+            fields.expYY.err.textContent = "";
+            fields.expYY.ok.classList.add("visible");
+          }
+
+          // CVC
+          if (!cvc) {
+            fields.cvc.err.textContent = "CVC required.";
+            fields.cvc.ok.classList.remove("visible");
+            valid = false;
+          } else if (!isThreeFour(cvc)) {
+            fields.cvc.err.textContent = "Must be 3–4 digits.";
+            fields.cvc.ok.classList.remove("visible");
+            valid = false;
+          } else {
+            fields.cvc.err.textContent = "";
+            fields.cvc.ok.classList.add("visible");
+          }
+
+          nextBtn.disabled = !valid;
+
+          // Live preview
+          preview.name.textContent = nameVal;
+          preview.card.textContent = cardValRaw;
+          preview.exp.textContent = mm && yy ? `${mm}/${yy}` : "";
+          preview.cvc.textContent = cvc;
+        }
+
+        Object.values(fields).forEach((f) =>
+          f.el.addEventListener("input", validate)
+        );
+
+        form.addEventListener("submit", (e) => {
+          validate();
+          if (nextBtn.disabled) {
+            e.preventDefault();
+            alert("Please fix the highlighted errors before continuing.");
+          } else {
+            e.preventDefault();
+            alert("✅ All inputs valid — proceed to next page.");
+            // Example: window.location.href = 'nextpage.html';
+          }
+        });
+
+        validate();
+      })();
+    </script>
+  </body>
+</html>
