@@ -5,7 +5,7 @@ This project provides real-time form validation, live card preview updates, and 
 
 ## 🚀 Live Demo
 
-## 🔗 Live Site: https://demo-mortgage-calculatorr.netlify.app
+## 🔗 Live Site: https://demo-card-form.netlify.app
 
 ## 💻 GitHub Repo: [https://github.com/pro-mcode/demo-card-form] (https://github.com/pro-mcode/demo-card-form)
 
