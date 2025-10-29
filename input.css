@@ -4,6 +4,16 @@
 .body-conainer {
   @apply flex flex-col justify-center items-center min-h-screen;
 }
+@layer base {
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    -webkit-text-fill-color: currentColor !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: currentColor;
+  }
+}
 /* input:focus {
   border: 1.5px solid transparent;
   border-image: linear-gradient(
@@ -15,7 +25,8 @@
   border-radius: 8px;
 }
  */
-.disclaimer {
+.disclaimer,
+.payment-btn {
   background: linear-gradient(
     to top right,
     hsl(249, 99%, 64%),

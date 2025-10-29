@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Card Form — Validation</title>
+    <title>Payment Methods</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,31 +21,10 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body class="body-container font-sans relative">
-    <!-- Disclaimer -->
-    <div
-      id="disclaimer"
-      class="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-white text-base font-medium z-20 p-6 rounded-lg min-w-[280px] md:max-w-[400px] duration-150 transition-all ease-in-out disclaimer"
-    >
-      <!-- <div
-        id="remove-disclaimer"
-        class="absolute right-[2%] top-[2%] p-2 rounded-full bg-wite text-white text-2xl cursor-pointer hover:scale-105 transition-all duration-150"
-      >
-        <i class="fa-solid fa-circle-xmark"></i>
-      </div> -->
-      ⚠️ Disclaimer: The card details you enter on this page are not saved or
-      processed in any way. This form is for testing or demonstration purposes
-      only. Please do not enter real card information.
-      <button
-        id="remove-disclaimer"
-        class="block text-sm mx-auto mt-4 bg-purple-950 p-2 px-4 rounded-md md:mx-0 hover:opacity-75 duration-150 transition-all"
-      >
-        Accept
-      </button>
-    </div>
+  <body class="body-container font-sans bg-gray-100">
     <!-- Global Container -->
     <div
-      class="flex flex-col justify-start items-start w-screen min-h-screen md:flex-row md:items-strecth max-w-[1440px] mx-auto relative"
+      class="flex flex-col justify-start items-stretch w-screen min-h-screen md:flex-row md:items-strecth max-w-[1440px] mx-auto relative"
     >
       <!-- Background Image Covering 30% of the Screen on Desktop View -->
       <img
@@ -53,199 +32,372 @@
         alt=""
         class="min-h-screen w-[35%] xl:max-w-[30%] hidden md:block"
       />
-      <!-- Background Image Covering 30% of the Screen on Desktop View -->
-      <img
-        src="/images/bg-main-mobile.png"
-        alt=""
-        class="max-h-[30vh] w-full md:hidden"
-      />
-      <!-- Card Back Container -->
+      <!-- Form and Complete State Container -->
       <div
-        class="absolute top-[4%] right-[4%] w-72 h-[10rem] max-h-[10rem] max-w-[80%] md:h-52 md:max-h-[12rem] md:w-[20rem] md:max-w-[20rem] md:top-[50%] md:left-[10%] lg:left-[15%] z-10 hover:scale-105 transition-all duration-300"
+        class="md:hiddn relative flex flex-col justify-cente items-cente min-h-fit w-[90%] my-12 mx-auto md:min-h-screen md:my-20 mb-20 md:mb-0 md:max-w-[60%] hiddn"
       >
-        <div class="relative flex justify-center items-center h-full">
-          <!-- Back Card Image -->
-          <img src="/images/bg-card-back.png" alt="" class="w-full h-full" />
-          <div class="absolute top-[45%] w-full">
-            <div
-              class="flex justify-end items-center gap-2 mx-auto mb-[5%] w-[80%]"
+        <!-- Add payment method pop-up -->
+        <div
+          id="disclaimer"
+          class="bg-white fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-base font-medium z-20 p-8 rounded-3xl w-[480px] max-w-full md:max-w-[600px] duration-150 transition-all ease-in-out shadow-md hidden"
+        >
+          <!-- Close icon -->
+          <div id="remove-disclaimer" class="flex justify-between items-center">
+            <span class="text-black text-lg font-medium"
+              >Add a payment method</span
             >
-              <span
-                class="text-[#fff] text-xs tracking-widest font-medium pr-3"
-                id="pv-cvc"
-                >123</span
-              >
+            <i
+              class="fa-solid fa-circle-xmark text-button text-2xl cursor-pointer hover:scale-105 transition-all duration-150"
+            ></i>
+          </div>
+          <div class="flex flex-col space-y-8 my-8">
+            <!-- card payment method -->
+            <div
+              class="flex justify-start items-center space-x-6 w-full border-b-2 border-gray-200 pb-2"
+            >
+              <input type="radio" name="" id="card" class="w-5 h-5" />
+              <label for="card">
+                <span class="text-black text-base font-light tracking-wide"
+                  >Add credit or debit card</span
+                >
+              </label>
             </div>
+            <!-- bank transfer payment method -->
+            <div
+              class="flex justify-start items-center space-x-6 w-full border-b-2 border-gray-200 pb-2"
+            >
+              <input type="radio" name="" id="bank" class="w-5 h-5" disabled />
+              <label for="bank">
+                <span class="text-black text-base font-light tracking-wide"
+                  >Add a bank account (coming soon)</span
+                >
+              </label>
+            </div>
+            <!-- bank transfer payment method -->
+            <!-- <div
+              class="relative justify-start items-center space-x-6 w-full border-2 border-gray-200 pb-2"
+            >
+              <input
+                type="radio"
+                id="bank"
+                name="mortgageType"
+                value="repayment"
+                class="peer hidden"
+              />
+              <label for="bank">
+                <span class="text-black text-base font-light tracking-wide"
+                  >Add a bank account (coming soon)</span
+                >
+              </label>
+              <span
+                class="w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-300 peer-checked:border-button peer-checked:bg-butto border-button/20 peer-checked:after:content-[''] peer-checked:after:w-2 peer-checked:after:h-2 peer-checked:after:bg-button border-button peer-checked:after:rounded-full"
+              ></span>
+            </div> -->
+          </div>
+
+          <!-- cancel and next buttons -->
+          <div class="flex justify-end items-center space-x-4">
+            <a
+              href="#"
+              id="remove-disclaimer"
+              class="text-button text-sm mt-4 md:mx-0 hover:opacity-75 duration-150 transition-all"
+            >
+              Cancel
+            </a>
+            <button
+              disabled
+              id="remove-disclaimer"
+              class="text-sm mx-auto mt-4 bg-purple-950 p-2 px-5 rounded-full md:mx-0 hover:opacity-75 duration-150 transition-all"
+            >
+              Next
+            </button>
           </div>
         </div>
-      </div>
-      <!-- Card Front Container -->
-      <div
-        class="absolute top-[4%] right-[12%] w-72 h-[10rem] max-h-[10rem] max-w-[80%] translate-y-[6rem] md:h-52 md:max-h-[12rem] md:w-[20rem] md:max-w-[20rem] md:top-[50%] md:left-[8%] lg:left-[13%] md:translate-y-[-210px] z-10 hover:scale-105 transition-all duration-300"
-      >
-        <div class="relative flex justify-center items-center h-full">
-          <div class="absolute flex items-center top-[10%] left-[5%] gap-2">
-            <span class="w-8 h-8 bg-white rounded-full"></span>
+
+        <h3 class="text-black text-2xl font-medium text-left">
+          Payment Methods
+        </h3>
+        <p class="text-black text-base font-light text-left my-4">
+          Add, view and manage demo payment methods that can be tested with Demo
+          Pay.
+        </p>
+        <a
+          href="add-payment-method.html"
+          class="py-2 px-5 rounded-full bg-btton text-white max-w-fit payment-btn"
+        >
+          <i class="fa-solid fa-plus mr-2 text-base font-light"></i> Add payment
+          method
+        </a>
+        <div
+          class="payment-method-wrapper bg-white rounded-3xl p-4 my-8 space-y-4 md:p-6"
+        >
+          <!-- card details container -->
+          <div
+            class="flex flex-col space-y-4 mb-12 card-details-container max-h-[20rem] overflow-y-scroll"
+          >
+            <a
+              href="card-details.html"
+              class="bg-gray-200 rounded-3xl p-4 flex justify-start items-center space-x-4 md:space-x-8"
+            >
+              <!-- card logo -->
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-10 h-10 bg-purple-950 rounded-full md:w-12 md:h-12"
+                ></span>
+                <span
+                  class="w-5 h-5 bg-transparent rounded-full border-2 border-purple-950 md:w-6 md:h-6"
+                ></span>
+              </div>
+              <!-- card details -->
+              <div class="card-details">
+                <span
+                  class="text-black text-base font-normal tracking-wide md:text:lg"
+                  >Democard **** 5567</span
+                >
+                <p
+                  class="text-black text-base font-light tracking-wide md:text-lg"
+                >
+                  12/25
+                </p>
+              </div>
+            </a>
+            <div
+              class="bg-gray-200 rounded-3xl p-4 flex justify-start items-center space-x-4 md:space-x-8"
+            >
+              <!-- card logo -->
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-10 h-10 bg-purple-950 rounded-full md:w-12 md:h-12"
+                ></span>
+                <span
+                  class="w-5 h-5 bg-transparent rounded-full border-2 border-purple-950 md:w-6 md:h-6"
+                ></span>
+              </div>
+              <!-- card details -->
+              <div class="card-details">
+                <span
+                  class="text-black text-base font-normal tracking-wide md:text:lg"
+                  >Democard **** 5567</span
+                >
+                <p
+                  class="text-black text-base font-light tracking-wide md:text-lg"
+                >
+                  12/25
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-gray-200 rounded-3xl p-4 flex justify-start items-center space-x-4 md:space-x-8"
+            >
+              <!-- card logo -->
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-10 h-10 bg-purple-950 rounded-full md:w-12 md:h-12"
+                ></span>
+                <span
+                  class="w-5 h-5 bg-transparent rounded-full border-2 border-purple-950 md:w-6 md:h-6"
+                ></span>
+              </div>
+              <!-- card details -->
+              <div class="card-details">
+                <span
+                  class="text-black text-base font-normal tracking-wide md:text:lg"
+                  >Democard **** 5567</span
+                >
+                <p
+                  class="text-black text-base font-light tracking-wide md:text-lg"
+                >
+                  12/25
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- card logo -->
+          <div class="flex items-center gap-2 justify-self-end">
+            <span class="w-8 h-8 bg-purple-950 rounded-full"></span>
             <span
-              class="w-4 h-4 bg-transparent rounded-full border-2 border-white"
+              class="w-4 h-4 bg-transparent rounded-full border-2 border-purple-950"
             ></span>
-          </div>
-          <!-- Front Card Image -->
-          <img src="/images/bg-card-front.png" alt="" class="w-full h-full" />
-          <div class="absolute top-[50%] w-full preview">
-            <div class="flex justify-center items-center gap-2 mx-auto mb-[5%]">
-              <span
-                class="text-[#fff] text-sm tracking-widest font-medium font-sans md:text-base"
-                id="pv-card"
-                >0000 0000 0000 0000</span
-              >
-            </div>
-            <div
-              class="flex justify-between items-center gap-4 text-white px-5 mx-auto"
+            <span class="text-black text-2xl font-medium tracking-wide"
+              >Pay</span
             >
-              <p
-                class="text-[#fff] text-[12px] font-medium uppercase md:text-sm md:tracking-wider"
-                id="pv-name"
-              >
-                Adedamola Maxwell
-              </p>
-              <p
-                class="text-[#fff] text-[12px] tracking-widest font-medium md:text-base"
-                id="pv-exp"
-              >
-                00/00
-              </p>
-            </div>
           </div>
         </div>
+        <!-- footer -->
+        <footer class="w-full mt-10">
+          <div
+            class="border-t-2 border-gray-200 w-full pt-4 space-y-4 flex flex-col md:inline-block md:space-y-0"
+          >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Terms</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Demo Pay terms</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Privacy</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Payments privacy</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >State licences</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Electronic communications policy</span
+            >
+          </div>
+          <div
+            class="w-full flex flex-col justify-start py-8 space-y-4 md:flex-row md:justify-between md:space-y-0"
+          >
+            <span class="text-black text-sm font-normal opacity-60"
+              >© 2025 Demo Pay. All rights reserved.</span
+            >
+            <div class="text-black text-sm font-normal opacity-60">
+              <a href="#">
+                <i class="fas fa-code"></i> by
+                <strong class="uppercase text-[12px]">AD-M INNOVATIONS</strong>
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
       <!-- Form and Complete State Container -->
       <div
-        class="md:hiddn relative flex flex-col justify-center items-center min-h-fit w-screen mx-auto md:h-screen mb-20 md:mb-0 md:max-w-[50%] md:translate-x-[14%] lg:translate-x-[0]"
+        class="md:hiddn hidden relative fle flex-col justify-center items-center min-h-fit w-[90%] mx-auto md:max-w-[60%]"
       >
-        <!-- Form -->
-        <form
-          class="max-w-[80%] translate-y-[30%] md:translate-y-[0] pb-12 md:pb-0"
-          id="cardForm"
-          novalidate
+        <!-- Add payment method pop-up -->
+        <div
+          id="disclaimer"
+          class="bg-white fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-base font-medium z-20 p-8 rounded-3xl w-[480px] max-w-full md:max-w-[600px] duration-150 transition-all ease-in-out shadow-md hidden"
         >
-          <label
-            for="card-holder"
-            class="text-xs text-primary font-medium tracking-widest uppercase cursor-pointer"
-            >Cardholder name</label
-          >
-          <input
-            id="card-holder"
-            type="text"
-            placeholder="Adedamola Maxwell"
-            maxlength="19"
-            class="w-full p-2 mt-2 rounded-lg border-[1.5px] border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,#d1d5db,#d1d5db)_border-box] focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,hsl(249,99%,64%),hsl(278,94%,30%))_border-box] outline-none"
-          />
-          <p class="text-error text-sm mb-6" id="err-name"></p>
-          <label
-            for="card-number"
-            class="text-xs text-primary font-medium tracking-widest uppercase cursor-pointer"
-            >Card number</label
-          >
-          <input
-            id="card-number"
-            type="text"
-            inputmode="numeric"
-            autocomplete="cc-number"
-            maxlength="19"
-            placeholder="0000 0000 0000 0000"
-            class="w-full p-2 mt-2 rounded-lg border-[1.5px] border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,#d1d5db,#d1d5db)_border-box] focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,hsl(249,99%,64%),hsl(278,94%,30%))_border-box] outline-none"
-          />
-          <p class="text-error text-sm mb-6" id="err-cardNumber"></p>
-          <div class="flex w-fll gap-2 md:max-w-">
-            <!-- Exp. Date -->
-            <div class="flex-1">
-              <label
-                for="expMM"
-                class="text-xs text-primary font-medium tracking-widest uppercase cursor-pointer"
-              >
-                Exp. date
+          <!-- Close icon -->
+          <div id="remove-disclaimer" class="flex justify-between items-center">
+            <span class="text-black text-lg font-medium"
+              >Add a payment method</span
+            >
+            <i
+              class="fa-solid fa-circle-xmark text-button text-2xl cursor-pointer hover:scale-105 transition-all duration-150"
+            ></i>
+          </div>
+          <div class="flex flex-col space-y-8 my-8">
+            <!-- card payment method -->
+            <div
+              class="flex justify-start items-center space-x-6 w-full border-b-2 border-gray-200 pb-2"
+            >
+              <input type="radio" name="" id="card" class="w-5 h-5" />
+              <label for="card">
+                <span class="text-black text-base font-light tracking-wide"
+                  >Add credit or debit card</span
+                >
               </label>
-              <div class="flex gap-2">
-                <div class="">
-                  <input
-                    id="expMM"
-                    type="text"
-                    inputmode="numeric"
-                    placeholder="MM"
-                    maxlength="2"
-                    class="w-full p-2 mt-2 rounded-lg border-[1.5px] border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,#d1d5db,#d1d5db)_border-box] focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,hsl(249,99%,64%),hsl(278,94%,30%))_border-box] outline-none"
-                    placeholder="MM"
-                  />
-                  <span class="text-error text-sm mb-6" id="err-expMM"></span>
-                </div>
-                <div class="relative">
-                  <input
-                    id="expYY"
-                    type="text"
-                    inputmode="numeric"
-                    placeholder="YY"
-                    maxlength="2"
-                    class="w-full p-2 mt-2 rounded-lg border-[1.5px] border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,#d1d5db,#d1d5db)_border-box] focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,hsl(249,99%,64%),hsl(278,94%,30%))_border-box] outline-none"
-                    placeholder="YY"
-                  />
-                  <span class="text-error text-sm mb-6" id="err-expYY"></span>
-                </div>
-              </div>
             </div>
-
-            <!-- CVC -->
-            <div class="flex-1">
-              <label
-                for="cvc"
-                class="text-xs text-primary font-medium tracking-widest uppercase cursor-pointer"
-              >
-                CVC
+            <!-- bank transfer payment method -->
+            <div
+              class="flex justify-start items-center space-x-6 w-full border-b-2 border-gray-200 pb-2"
+            >
+              <input type="radio" name="" id="bank" class="w-5 h-5" disabled />
+              <label for="bank">
+                <span class="text-black text-base font-light tracking-wide"
+                  >Add a bank account (coming soon)</span
+                >
               </label>
-              <input
-                id="cvc"
-                type="text"
-                inputmode="numeric"
-                maxlength="4"
-                class="w-full p-2 mt-2 rounded-lg border-[1.5px] border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,#d1d5db,#d1d5db)_border-box] focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,hsl(249,99%,64%),hsl(278,94%,30%))_border-box] outline-none"
-                placeholder="e.g 123"
-              />
-              <p class="text-error text-sm mb-6" id="err-cvc"></p>
             </div>
           </div>
-          <button
-            class="bg-primary text-white font-medium tracking-wide w-full rounded-md shadow-md py-2 px-4 text-center outline-none hover:opacity-80 mt-8 transition-all duration-300"
-            id="nextBtn"
-          >
-            Confirm
-          </button>
-        </form>
-        <!-- Completed State -->
+
+          <!-- cancel and next buttons -->
+          <div class="flex justify-end items-center space-x-4">
+            <a
+              href="#"
+              id="remove-disclaimer"
+              class="text-button text-sm mt-4 md:mx-0 hover:opacity-75 duration-150 transition-all"
+            >
+              Cancel
+            </a>
+            <button
+              disabled
+              id="remove-disclaimer"
+              class="text-sm mx-auto mt-4 bg-purple-950 p-2 px-5 rounded-full md:mx-0 hover:opacity-75 duration-150 transition-all"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
         <div
-          class="hidden flex-col justify-center items-center space-y-6 max-w-[80%] translate-y-[40%] md:translate-y-[0] pb-12 md:pb-0"
-          id="completed"
+          class="flex flex-col justify-center items-center space-y-4 min-h-screen"
         >
           <img
-            src="/images/icon-complete.svg"
-            alt="complete-icon"
-            class="mx-auto"
+            src="/images/empty-payment-method.svg"
+            alt="empty-payment-method"
+            class="max-w-[15rem] mb-4"
           />
-          <h3
-            class="text-3xl text-primary text-center font-medium tracking-widest uppercase"
-          >
-            Thank You!
+          <h3 class="text-black text-2xl font-medium text-center">
+            You haven’t added any cards yet
           </h3>
-          <p
-            class="text-lg text-center text-gray-500 font-medium tracking-wider"
-          >
-            We've added your card details
+          <p class="text-black text-base font-light text-center my-4">
+            Add demo card details to explore how payment methods are displayed
+            and managed within Demo Pay. No real transactions or data are
+            processed.
           </p>
           <a
-            href="#"
-            class="bg-primary text-white text-lg font-medium text-center w-full py-3 rounded-md shadow-md tracking-wider hover:opacity-70 translate-y-2"
-            >Continue</a
+            href="add-payment-method.html"
+            class="py-2 px-5 rounded-full text-white max-w-fit payment-btn"
           >
+            <i class="fa-solid fa-plus mr-2 text-base font-light"></i> Add
+            payment method
+          </a>
         </div>
+        <!-- footer -->
+        <footer class="w-full mt-10">
+          <div
+            class="border-t-2 border-gray-200 w-full pt-4 space-y-4 flex flex-col md:inline-block md:space-y-0"
+          >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Terms</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Demo Pay terms</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Privacy</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Payments privacy</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >State licences</span
+            >
+            <span
+              class="text-black text-sm text-light inline-block mr-12 hover:opacity-50 duration-75 transition cursor-pointer md:py-3"
+              >Electronic communications policy</span
+            >
+          </div>
+          <div
+            class="w-full flex flex-col justify-start py-8 space-y-4 md:flex-row md:justify-between md:space-y-0"
+          >
+            <span class="text-black text-sm font-normal opacity-60"
+              >© 2025 Demo Pay. All rights reserved.</span
+            >
+            <div class="text-black text-sm font-normal opacity-60">
+              <a href="#">
+                <i class="fas fa-code"></i> by
+                <strong class="uppercase text-[12px]">AD-M INNOVATIONS</strong>
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
     <script src="js/index.js"></script>
